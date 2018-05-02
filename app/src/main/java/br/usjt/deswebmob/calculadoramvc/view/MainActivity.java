@@ -1,4 +1,4 @@
-package br.usjt.deswebmob.calculadoramvc.controller;
+package br.usjt.deswebmob.calculadoramvc.view;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,10 +6,12 @@ import android.view.View;
 import android.widget.EditText;
 import br.usjt.deswebmob.calculadoramvc.model.Calculadora;
 import br.usjt.deswebmob.calculadoramvc.R;
+import br.usjt.deswebmob.calculadoramvc.presenter.MainPresenter;
+import br.usjt.deswebmob.calculadoramvc.presenter.Presenter;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements MainView{
     EditText valor1, valor2, operador, resultado;
-    Calculadora model;
+    MainPresenter presenter = new MainPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +21,24 @@ public class MainActivity extends Activity {
         valor2 = (EditText)findViewById(R.id.valor2);
         operador = (EditText)findViewById(R.id.operador);
         resultado = (EditText)findViewById(R.id.resultado);
-        model = new Calculadora();
+        presenter.onCreate();
     }
 
     public void calcular(View view){
-        model.setValor1(valor1.getText().toString());
-        model.setValor2(valor2.getText().toString());
-        model.setOperador(operador.getText().toString());
-        model.calculo();
-        resultado.setText(model.getResultado());
+        presenter.calculo();
+    }
+
+    public String getValor1(){
+        return valor1.getText().toString();
+    }
+    public String getValor2(){
+        return valor2.getText().toString();
+    }
+    public String getOperador(){
+        return operador.getText().toString();
+    }
+
+    public void setResultado(String resultado){
+        this.resultado.setText(resultado);
     }
 }
