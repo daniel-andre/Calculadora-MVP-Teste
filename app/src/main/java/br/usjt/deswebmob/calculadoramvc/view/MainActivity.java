@@ -9,7 +9,7 @@ import br.usjt.deswebmob.calculadoramvc.R;
 import br.usjt.deswebmob.calculadoramvc.presenter.MainPresenter;
 import br.usjt.deswebmob.calculadoramvc.presenter.Presenter;
 
-public class MainActivity extends Activity implements MainView{
+public class  MainActivity extends Activity implements MainView{
     EditText valor1, valor2, operador, resultado;
     MainPresenter presenter = new MainPresenter(this);
 
@@ -31,11 +31,17 @@ public class MainActivity extends Activity implements MainView{
     public String getValor1(){
         return valor1.getText().toString();
     }
+
     public String getValor2(){
         return valor2.getText().toString();
     }
     public String getOperador(){
         return operador.getText().toString();
+    }
+
+    @Override
+    public String getResultado() {
+        return this.resultado.getText().toString();
     }
 
     public void setResultado(String resultado){
